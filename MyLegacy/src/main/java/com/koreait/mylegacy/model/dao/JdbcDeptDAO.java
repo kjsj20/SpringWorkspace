@@ -1,17 +1,19 @@
 package com.koreait.mylegacy.model.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.koreait.mylegacy.domain.Dept;
-import com.koreait.mylegacy.model.pool.PoolManager;
 @Repository
 public class JdbcDeptDAO {
-	@Autowired
-	private PoolManager manager;
-	
+	private Connection con;
+	public void setCon(Connection con) {
+		this.con = con;
+	}
 	public List selectAll() {
 		List list = null;
 		return list;
@@ -22,9 +24,25 @@ public class JdbcDeptDAO {
 		return dept;
 	}
 	
-	public int regist(Dept dept) {
+	public int regist(Dept dept) throws SQLException{
 		int result = 0;
-		System.out.println("풀매니저"+manager);
+		PreparedStatement pstmt = null;
+		String sql = "insert into dept(deptno, dname, loc) values(?,?,?)";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, dept.getDeptno());
+			pstmt.setString(2, dept.getDname());
+			pstmt.setString(3, dept.getLoc());
+			result = pstmt.executeUpdate();
+		} finally {
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		return result;
 	}
 	

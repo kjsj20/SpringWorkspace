@@ -3,8 +3,8 @@ package com.koreait.mylegacy.domain;
 public class Emp {
 	private int empno;
 	private String ename;
-	private String sal;
-	private	String deptno;
+	private int sal;
+	private	Dept dept;
 	public int getEmpno() {
 		return empno;
 	}
@@ -17,19 +17,16 @@ public class Emp {
 	public void setEname(String ename) {
 		this.ename = ename;
 	}
-	public String getSal() {
+	public int getSal() {
 		return sal;
 	}
-	public void setSal(String sal) {
+	public void setSal(int sal) {
 		this.sal = sal;
 	}
-	public String getDeptno() {
-		return deptno;
+	public Dept getDept() {
+		return dept;
 	}
-	public void setDeptno(String deptno) {
-		this.deptno = deptno;
+	public void setDept(Dept dept) {
+		this.dept = dept;
 	}
-	
-	
-	
 }
