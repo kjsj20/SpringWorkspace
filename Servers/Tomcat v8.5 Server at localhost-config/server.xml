@@ -46,7 +46,7 @@
 			and responses are returned. Documentation at : Java HTTP Connector: /docs/config/http.html 
 			Java AJP Connector: /docs/config/ajp.html APR (HTTP/AJP) Connector: /docs/apr.html 
 			Define a non-SSL/TLS HTTP/1.1 Connector on port 8080 -->
-		<Connector URIEncoding="UTF-8" connectionTimeout="20000" port="9999" protocol="HTTP/1.1" redirectPort="8443"/>
+		<Connector URIEncoding="UTF-8" connectionTimeout="20000" port="7777" protocol="HTTP/1.1" redirectPort="8443"/>
 		<!-- A "Connector" using the shared thread pool -->
 		<!-- <Connector executor="tomcatThreadPool" port="8080" protocol="HTTP/1.1" 
 			connectionTimeout="20000" redirectPort="8443" /> -->
@@ -107,7 +107,7 @@
 
 				<Context docBase="SpringApp1223" path="/SpringApp1223" reloadable="true" source="org.eclipse.jst.jee.server:SpringApp1223"/>
 				<Context docBase="SpringMVC1222" path="/SpringMVC1222" reloadable="true" source="org.eclipse.jst.jee.server:SpringMVC1222"/>
-			<Context docBase="AOPProject" path="/AOPProject" reloadable="true" source="org.eclipse.jst.jee.server:AOPProject"/><Context docBase="SpringFinal" path="/" reloadable="true" source="org.eclipse.jst.jee.server:SpringFinal"/></Host>
+			<Context docBase="AOPProject" path="/AOPProject" reloadable="true" source="org.eclipse.jst.jee.server:AOPProject"/><Context docBase="SpringFinal" path="/SpringFinal" reloadable="true" source="org.eclipse.jst.jee.server:SpringFinal"/><Context docBase="MyLegacy" path="/" reloadable="true" source="org.eclipse.jst.jee.server:MyLegacy"/></Host>
 		</Engine>
 	</Service>
 </Server>
