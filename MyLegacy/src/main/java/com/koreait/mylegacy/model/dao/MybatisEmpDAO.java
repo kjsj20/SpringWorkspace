@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.koreait.mylegacy.domain.Emp;
+import com.koreait.mylegacy.exception.RegistException;
 @Repository
 public class MybatisEmpDAO {
 	private SqlSession sqlSession = null;
@@ -19,9 +20,12 @@ public class MybatisEmpDAO {
 		return list;
 	}
 	
-	public int insert(Emp emp) {
+	public int insert(Emp emp) throws RegistException{
 		int result = 0;
-		result = sqlSession.insert("Emp.insert", emp);
+		result = sqlSession.insert("Emp.insert", emp); // emp가 dept안에 포함
+		if(result==0) {
+			throw new RegistException("사원등록에 실패하였습니다..");
+		}
 		return result;
 	}
 	

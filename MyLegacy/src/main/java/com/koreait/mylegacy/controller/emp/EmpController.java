@@ -49,7 +49,7 @@ public class EmpController {
 //	System.out.println(emp.getDeptno());
 	
 	emp.setDept(dept);
-	int result = empService.regist(emp);
+	int result = mybatisEmpService.regist(emp);
 	System.out.println("등록결과"+result);
 	return "redirect:/emp/list";
 	}

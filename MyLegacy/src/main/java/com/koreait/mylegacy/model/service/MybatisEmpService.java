@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.koreait.mylegacy.domain.Dept;
 import com.koreait.mylegacy.domain.Emp;
+import com.koreait.mylegacy.exception.RegistException;
 import com.koreait.mylegacy.model.dao.JdbcDeptDAO;
 import com.koreait.mylegacy.model.dao.JdbcEmpDAO;
 import com.koreait.mylegacy.model.dao.MybatisDeptDAO;
@@ -45,8 +46,17 @@ public class MybatisEmpService {
 			mybatisEmpDAO.setSqlSession(sqlSession);
 			mybatisDeptDAO.setSqlSession(sqlSession);
 			
-			mybatisEmpDAO.insert(emp);
-			mybatisDeptDAO.insert(emp.getDept());
+			try {
+				mybatisEmpDAO.insert(emp);
+				mybatisDeptDAO.insert(emp.getDept());
+				sqlSession.commit();
+				result = 1;
+			} catch (RegistException e) {
+				sqlSession.rollback();
+				e.printStackTrace();
+			}
+			
+			manager.close(sqlSession);
 			return result;
 		}
 }
