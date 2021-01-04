@@ -112,6 +112,7 @@ public class ProductController {
 	
 	//상품 등록 
 	@RequestMapping(value="/admin/product/regist", method=RequestMethod.POST)
+	@ResponseBody
 	public String registProduct(Product product) {
 		logger.debug("하위카테고리 "+product.getSubcategory_id());
 		logger.debug("상품명 "+product.getProduct_name());
@@ -120,33 +121,32 @@ public class ProductController {
 		logger.debug("상세내용 "+product.getDetail());
 		logger.debug("업로드 이미지명 "+product.getRepImg().getOriginalFilename());
 		
-		for(int i=0;i<product.getFit().length;i++) {
-			String fit = product.getFit()[i];
-			logger.debug("지원 사이즈는  "+fit);
+		for(int i=0;i<product.getAddImg().length;i++) {
+			logger.debug(product.getAddImg()[i].getOriginalFilename());
 		}
 		
 		
 		//대표이미지 업로드(현재 날짜로 처리)
 		//어떤 파일명으로, 어디에 저장할지 결정
-		long time = System.currentTimeMillis();
+//		long time = System.currentTimeMillis();
+//		
+//		//확장자 얻기
+//		String ext = fileManager.getExtend(product.getRepImg().getOriginalFilename());
+//		String filename=time+"."+ext;
+//		try {
+//			product.getRepImg().transferTo(new File(fileManager.getSaveDir()+"/"+filename));
+//			logger.debug(filename);
+//			
+//		} catch (IllegalStateException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		//db에 넣기 
+//		productService.regist(product);
 		
-		//확장자 얻기
-		String ext = fileManager.getExtend(product.getRepImg().getOriginalFilename());
-		String filename=time+"."+ext;
-		try {
-			product.getRepImg().transferTo(new File(fileManager.getSaveDir()+"/"+filename));
-			logger.debug(filename);
-			
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		//db에 넣기 
-		productService.regist(product);
-		
-		return "redirect:/admin/product/list";
+		return "HAHAHA";
 	}
 	
 	//상품 수정
